@@ -90,6 +90,7 @@ var gZenVerticalTabsManager = {
 
     if (tabs) {
       tabs.addEventListener('mouseup', this.openNewTabOnTabsMiddleClick.bind(this));
+      tabs.addEventListener("mouseup", this.openNewTabFolder.bind(this))
     }
   },
 
@@ -98,6 +99,21 @@ var gZenVerticalTabsManager = {
       document.getElementById('cmd_newNavigatorTabNoEvent').doCommand();
       event.stopPropagation();
       event.preventDefault();
+    }
+  },
+
+  openNewTabFolder(event) {
+    if (event.button === 0 && event.target.id === 'tabbrowser-tabs' && this.canOpenTabOnMiddleClick) {
+      const folder = document.createElement("button")
+      folder.className = "folder-1"
+      folder.innerHTML = `
+        DIES IST EIN TEST
+      `
+      folder.addEventListener("click", () => {
+        console.log("WORKS")
+      })
+
+      document.getElementById("tabbrowser-tabs").appendChild(folder)
     }
   },
 
